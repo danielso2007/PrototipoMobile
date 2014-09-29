@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="azul_pinngo">#3ABEB6</color>
+    <color name="roxo_pinngo">#94298D</color>
+    <color name="texto_branco">#FFFFFF</color>
+    <color name="cinza_claro">#F0F0F0</color>
+    <color name="cinza_escuro">#1b1b1b</color>
+    
+    <!-- List tela Principal -->
+    <color name="genre">#666666</color>
+    <color name="year">#888888</color>
+    <color name="list_divider">#d9d9d9</color>
+    <color name="list_row_start_color">#ffffff</color>
+    <color name="list_row_end_color">#ffffff</color>
+    <color name="list_row_hover_start_color">#ebeef0</color>
+    <color name="list_row_hover_end_color">#ebeef0</color>
+</resources>
