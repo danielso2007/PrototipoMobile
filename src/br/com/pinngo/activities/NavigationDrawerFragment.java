@@ -1,8 +1,11 @@
 package br.com.pinngo.activities;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -18,14 +21,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import br.com.pinngo.R;
+import br.com.pinngo.adapter.NavDrawerListAdapter;
+import br.com.pinngo.adapter.model.NavDrawerItem;
 
 /**
- * Fragmento usado para o gerenciamento de interações para e apresentação de uma navigation drawer.
- * See the <a href="https://developer.android.com/design/patterns/navigation-drawer.html#Interaction">
- * design guidelines</a> para uma explicação completa dos comportamentos implementados aqui.
+ * Fragmento usado para o gerenciamento de interações para e apresentação de uma
+ * navigation drawer.
+ * See the <a href=
+ * "https://developer.android.com/design/patterns/navigation-drawer.html#Interaction"
+ * >
+ * design guidelines</a> para uma explicação completa dos comportamentos
+ * implementados aqui.
  */
 public class NavigationDrawerFragment extends Fragment {
 
@@ -35,8 +43,10 @@ public class NavigationDrawerFragment extends Fragment {
 	private static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
 
 	/**
-	 * De acordo com as diretrizes de design, você deve mostrar a drawer no lançamento até que o
-	 * usuário expande-lo manualmente. Esta preferência compartilhada acompanha isso.
+	 * De acordo com as diretrizes de design, você deve mostrar a drawer no
+	 * lançamento até que o
+	 * usuário expande-lo manualmente. Esta preferência compartilhada acompanha
+	 * isso.
 	 */
 	private static final String PREF_USER_LEARNED_DRAWER = "navigation_drawer_learned";
 
@@ -58,6 +68,12 @@ public class NavigationDrawerFragment extends Fragment {
 	private boolean mFromSavedInstanceState;
 	private boolean mUserLearnedDrawer;
 
+	// slide menu items
+	private String[] navMenuTitles;
+	private TypedArray navMenuIcons;
+	private ArrayList<NavDrawerItem> navDrawerItems;
+	private NavDrawerListAdapter adapter;
+
 	public NavigationDrawerFragment() {
 	}
 
@@ -65,7 +81,8 @@ public class NavigationDrawerFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// Leia na bandeira indicando se o usuário tem demonstrado consciência da gaveta. Veja PREF_USER_LEARNED_DRAWER para mais detalhes.
+		// Leia na bandeira indicando se o usuário tem demonstrado consciência
+		// da gaveta. Veja PREF_USER_LEARNED_DRAWER para mais detalhes.
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		mUserLearnedDrawer = sp.getBoolean(PREF_USER_LEARNED_DRAWER, true);
 
@@ -81,12 +98,16 @@ public class NavigationDrawerFragment extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		// Indicam que este fragmento gostaria de influenciar o conjunto de ações na barra de ação.
+		// Indicam que este fragmento gostaria de influenciar o conjunto de
+		// ações na barra de ação.
 		setHasOptionsMenu(true);
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		// mDrawerListView = (ListView)
+		// inflater.inflate(R.layout.fragment_navigation_drawer, container,
+		// false).findViewById(R.id.listDrawer);
 		mDrawerListView = (ListView) inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
 		mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
@@ -94,8 +115,41 @@ public class NavigationDrawerFragment extends Fragment {
 				selectItem(position);
 			}
 		});
-		mDrawerListView.setAdapter(new ArrayAdapter<String>(getActionBar().getThemedContext(), android.R.layout.simple_list_item_activated_1, android.R.id.text1, new String[]{
-				getString(R.string.title_section1), getString(R.string.title_section2), getString(R.string.title_section3), }));
+		// mDrawerListView.setAdapter(new
+		// ArrayAdapter<String>(getActionBar().getThemedContext(),
+		// android.R.layout.simple_list_item_activated_1, android.R.id.text1,
+		// new String[]{
+		// getString(R.string.title_section1),
+		// getString(R.string.title_section2),
+		// getString(R.string.title_section3), }));
+
+		// load slide menu items
+		navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
+
+		// nav drawer icons from resources
+		navMenuIcons = getResources().obtainTypedArray(R.array.nav_drawer_icons);
+
+		navDrawerItems = new ArrayList<NavDrawerItem>();
+
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1)));
+		// Find People
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1)));
+		// Photos
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
+		// Communities, Will add a counter here
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1), true, "22"));
+		// Pages
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1)));
+		// What's hot, We will add a counter here
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1), true, "50+"));
+
+		// Recycle the typed array
+		navMenuIcons.recycle();
+
+		// setting the nav drawer list adapter
+		adapter = new NavDrawerListAdapter(getActivity().getApplicationContext(), navDrawerItems);
+		mDrawerListView.setAdapter(adapter);
+
 		mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
 		return mDrawerListView;
 	}
@@ -105,28 +159,38 @@ public class NavigationDrawerFragment extends Fragment {
 	}
 
 	/**
-	 * Os usuários deste fragmento deve chamar esse método para definir as interações navigation drawer.
-	 * @param fragmentId O android: id deste fragmento no layout da sua actividade.
+	 * Os usuários deste fragmento deve chamar esse método para definir as
+	 * interações navigation drawer.
+	 * @param fragmentId O android: id deste fragmento no layout da sua
+	 *            actividade.
 	 * @param drawerLayout O DrawerLayout contendo IU deste fragmento.
 	 */
 	public void setUp(int fragmentId, DrawerLayout drawerLayout) {
 		mFragmentContainerView = getActivity().findViewById(fragmentId);
 		mDrawerLayout = drawerLayout;
 
-		// definir uma sombra personalizado que cobre o conteúdo principal quando a gaveta abre
+		// definir uma sombra personalizado que cobre o conteúdo principal
+		// quando a gaveta abre
 		mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-		
+
 		// configurar listview da drawer com itens e clique ouvinte
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setHomeButtonEnabled(true);
 
-		// ActionBarDrawerToggle une as as interações adequadas entre a gaveta de navegação e o ícone do aplicativo barra de ação.
+		// ActionBarDrawerToggle une as as interações adequadas entre a gaveta
+		// de navegação e o ícone do aplicativo barra de ação.
 		mDrawerToggle = new ActionBarDrawerToggle(getActivity(), /* host Activity */
 		mDrawerLayout, /* DrawerLayout object */
 		R.drawable.ic_drawer, /* nav drawer image to replace 'Up' caret */
-		R.string.navigation_drawer_open, /* description "gaveta aberta" de acessibilidade. */
-		R.string.navigation_drawer_close /* "close drawer" description for accessibility */
+		R.string.navigation_drawer_open, /*
+										 * description "gaveta aberta" de
+										 * acessibilidade.
+										 */
+		R.string.navigation_drawer_close /*
+										 * "close drawer" description for
+										 * accessibility
+										 */
 		) {
 			@Override
 			public void onDrawerClosed(View drawerView) {
@@ -134,7 +198,8 @@ public class NavigationDrawerFragment extends Fragment {
 				if (!isAdded()) {
 					return;
 				}
-				getActivity().supportInvalidateOptionsMenu(); // calls onPrepareOptionsMenu()
+				getActivity().supportInvalidateOptionsMenu(); // calls
+																// onPrepareOptionsMenu()
 			}
 
 			@Override
@@ -145,22 +210,28 @@ public class NavigationDrawerFragment extends Fragment {
 				}
 
 				if (!mUserLearnedDrawer) {
-					// O usuário abriu a gaveta manualmente; armazenar esta bandeira para evitar auto-mostrando a gaveta de navegação automaticamente no futuro.
+					// O usuário abriu a gaveta manualmente; armazenar esta
+					// bandeira para evitar auto-mostrando a gaveta de navegação
+					// automaticamente no futuro.
 					mUserLearnedDrawer = true;
 					SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
 					sp.edit().putBoolean(PREF_USER_LEARNED_DRAWER, true).apply();
 				}
 
-				getActivity().supportInvalidateOptionsMenu(); // calls onPrepareOptionsMenu()
+				getActivity().supportInvalidateOptionsMenu(); // calls
+																// onPrepareOptionsMenu()
 			}
 		};
 
-		// Se o usuário não tenha "aprendido" sobre a gaveta, abri-lo para apresentá-los para a gaveta, de acordo com as diretrizes de design da gaveta de navegação.
+		// Se o usuário não tenha "aprendido" sobre a gaveta, abri-lo para
+		// apresentá-los para a gaveta, de acordo com as diretrizes de design da
+		// gaveta de navegação.
 		if (!mUserLearnedDrawer && !mFromSavedInstanceState) {
 			mDrawerLayout.openDrawer(mFragmentContainerView);
 		}
 
-		// Adiar código dependente de restauração do estado da instância anterior.
+		// Adiar código dependente de restauração do estado da instância
+		// anterior.
 		mDrawerLayout.post(new Runnable() {
 			@Override
 			public void run() {
@@ -215,8 +286,10 @@ public class NavigationDrawerFragment extends Fragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		// Se a gaveta for aberta, mostrar as ações de aplicativos globais na barra de ação.
-		// Veja também showGlobalContextActionBar, que controla a área superior esquerdo da barra de ação.
+		// Se a gaveta for aberta, mostrar as ações de aplicativos globais na
+		// barra de ação.
+		// Veja também showGlobalContextActionBar, que controla a área superior
+		// esquerdo da barra de ação.
 		if (mDrawerLayout != null && isDrawerOpen()) {
 			inflater.inflate(R.menu.global, menu);
 			showGlobalContextActionBar();
@@ -234,13 +307,14 @@ public class NavigationDrawerFragment extends Fragment {
 
 	/**
 	 * De acordo com as diretrizes de design de gaveta navegação, atualiza a
-	 * barra de ação para mostrar o app 'contexto' global, e não apenas o que está na tela atual.
+	 * barra de ação para mostrar o app 'contexto' global, e não apenas o que
+	 * está na tela atual.
 	 */
 	private void showGlobalContextActionBar() {
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayShowTitleEnabled(true);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-//		actionBar.setTitle(R.string.app_name);
+		// actionBar.setTitle(R.string.app_name);
 		actionBar.setTitle("");
 	}
 
@@ -249,7 +323,8 @@ public class NavigationDrawerFragment extends Fragment {
 	}
 
 	/**
-	 * Interface de chamadas de retorno que todas as atividades que utilizam este fragmento deve implementar.
+	 * Interface de chamadas de retorno que todas as atividades que utilizam
+	 * este fragmento deve implementar.
 	 */
 	public static interface NavigationDrawerCallbacks {
 		/**

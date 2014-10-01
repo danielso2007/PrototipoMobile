@@ -1,53 +1,71 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_weight="1"
-    android:orientation="vertical"
     android:gravity="center"
+    android:background="@color/background_branco"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/login_vertical_margin"
     android:paddingLeft="@dimen/login_horizontal_margin"
     android:paddingRight="@dimen/login_horizontal_margin"
     android:paddingTop="@dimen/login_vertical_margin"
     tools:context="${relativePackage}.${activityClass}" >
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="40dp"
-        android:contentDescription="@string/img_string_logo"
-        android:src="@drawable/logo" />
-
-    <EditText
-        android:id="@+id/inputLogin"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:hint="@string/label_e_mail"
-        android:inputType="textEmailAddress"
-        android:textColor="@color/azul_pinngo" >
+        android:gravity="center"
+        android:orientation="vertical" >
 
-        <requestFocus />
-    </EditText>
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="40dp"
+            android:contentDescription="@string/img_string_logo"
+            android:src="@drawable/logo" />
 
-    <EditText
-        android:id="@+id/inputSenha"
-        android:layout_width="match_parent"
+        <EditText
+            android:id="@+id/inputLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:hint="@string/label_e_mail"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/azul_pinngo" >
+
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/inputSenha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:ems="10"
+            android:hint="@string/label_senha"
+            android:inputType="textPassword"
+            android:textColor="@color/azul_pinngo" />
+
+        <Button
+            android:id="@+id/btLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="55dp"
+            android:onClick="actionLogin"
+            android:text="@string/bt_login_label"
+            android:textColor="@color/texto_branco" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/labelLoginVersion"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:hint="@string/label_senha"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:textColor="@color/azul_pinngo" />
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:text="@string/label_login_version"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/roxo_pinngo" />
 
-    <Button
-        android:id="@+id/btLogin"
-        android:textColor="@color/texto_branco"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:onClick="actionLogin"
-        android:text="@string/bt_login_label" />
-
-</LinearLayout>
+</RelativeLayout>
