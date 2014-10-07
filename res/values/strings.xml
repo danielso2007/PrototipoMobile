@@ -18,16 +18,16 @@
     <string name="string_pesquisa_imagem">Imagem Pesquisa</string>
     <string name="string_loading">Carregando...</string>
     <string name="label_login_version">Pinngo Price Check</string>
-    
-    
+    <string name="message_back_pressed">Pressione Voltar novamente para sair</string>
+
     <!-- Nav Drawer Menu Items -->
     <string-array name="nav_drawer_items">
-        <item >Home</item>
-        <item >Find People</item>
-        <item >Photos</item>
-        <item >Communities</item>
-        <item >Pages</item>
-        <item >What\'s Hot</item>
+        <item>Home</item>
+        <item>Find People</item>
+        <item>Photos</item>
+        <item>Communities</item>
+        <item>Pages</item>
+        <item>What\'s Hot</item>
     </string-array>
     <!-- Nav Drawer List Item Icons -->
     <!-- Keep them in order as the titles are in -->
@@ -41,5 +41,7 @@
     </array>
     <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
+    <string name="title_activity_sincronismo">SincronismoActivity</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

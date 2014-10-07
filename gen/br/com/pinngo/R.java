@@ -1034,6 +1034,8 @@ containing a value of this type.
         public static final int login_horizontal_margin_land=0x7f08001a;
         public static final int login_vertical_margin=0x7f080019;
         public static final int login_vertical_margin_land=0x7f08001b;
+        /**  Navigation Drawer pode ter entre 240dp e 320dp 
+         */
         public static final int navigation_drawer_width=0x7f080017;
         public static final int rating=0x7f08001d;
         public static final int tab_host_default_height=0x7f080020;
@@ -1290,7 +1292,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_settings=0x7f05004d;
+        public static final int action_settings=0x7f050050;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
@@ -1308,7 +1310,9 @@ containing a value of this type.
         public static final int end=0x7f050013;
         public static final int expand_activities_button=0x7f050026;
         public static final int expanded_menu=0x7f05002c;
-        public static final int genre=0x7f05004b;
+        public static final int footerView=0x7f050049;
+        public static final int genre=0x7f05004e;
+        public static final int headerView=0x7f050048;
         public static final int home=0x7f050014;
         public static final int homeAsUp=0x7f050005;
         public static final int icon=0x7f05002a;
@@ -1319,9 +1323,10 @@ containing a value of this type.
         public static final int inputSenha=0x7f05003e;
         public static final int labelLoginVersion=0x7f050040;
         public static final int listMode=0x7f050001;
-        public static final int listPesquisas=0x7f050048;
+        public static final int listPesquisas=0x7f05004b;
         public static final int list_item=0x7f050029;
         public static final int middle=0x7f050012;
+        public static final int navigationItems=0x7f05004a;
         public static final int navigation_drawer=0x7f050043;
         public static final int never=0x7f050009;
         public static final int none=0x7f050010;
@@ -1329,8 +1334,8 @@ containing a value of this type.
         public static final int progress_circular=0x7f050018;
         public static final int progress_horizontal=0x7f050019;
         public static final int radio=0x7f05002f;
-        public static final int rating=0x7f05004a;
-        public static final int releaseYear=0x7f05004c;
+        public static final int rating=0x7f05004d;
+        public static final int releaseYear=0x7f05004f;
         public static final int search_badge=0x7f050032;
         public static final int search_bar=0x7f050031;
         public static final int search_button=0x7f050033;
@@ -1348,7 +1353,7 @@ containing a value of this type.
         public static final int split_action_bar=0x7f05001e;
         public static final int submit_area=0x7f050039;
         public static final int tabMode=0x7f050002;
-        public static final int thumbnail=0x7f050049;
+        public static final int thumbnail=0x7f05004c;
         public static final int title=0x7f05002b;
         public static final int top_action_bar=0x7f050020;
         public static final int txtLabel=0x7f050047;
@@ -1474,17 +1479,20 @@ containing a value of this type.
         public static final int bt_login_label=0x7f0a0011;
         /**  Content Description 
          */
-        public static final int desc_list_item_icon=0x7f0a001e;
+        public static final int desc_list_item_icon=0x7f0a001f;
+        public static final int hello_world=0x7f0a0021;
         public static final int img_string_logo=0x7f0a0010;
         public static final int label_e_mail=0x7f0a0013;
         public static final int label_login_version=0x7f0a001d;
         public static final int label_senha=0x7f0a0012;
+        public static final int message_back_pressed=0x7f0a001e;
         public static final int navigation_drawer_close=0x7f0a0019;
         public static final int navigation_drawer_open=0x7f0a0018;
         public static final int string_loading=0x7f0a001c;
         public static final int string_pesquisa_imagem=0x7f0a001b;
         public static final int title_activity_login=0x7f0a000f;
         public static final int title_activity_principal=0x7f0a0014;
+        public static final int title_activity_sincronismo=0x7f0a0020;
         public static final int title_activity_splash_screen=0x7f0a000e;
         public static final int title_section1=0x7f0a0015;
         public static final int title_section2=0x7f0a0016;

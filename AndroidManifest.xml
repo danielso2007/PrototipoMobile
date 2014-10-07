@@ -27,7 +27,7 @@
             android:label="@string/title_activity_login" >
         </activity>
         <activity
-            android:name="br.com.pinngo.activities.PrincipalActivity"
+            android:name=".activities.PrincipalActivity"
             android:label="@string/title_activity_principal" >
         </activity>
     </application>

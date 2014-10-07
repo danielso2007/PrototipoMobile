@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import br.com.pinngo.R;
 import br.com.pinngo.adapter.NavDrawerListAdapter;
@@ -78,7 +79,7 @@ public class NavigationDrawerFragment extends Fragment {
 	}
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		// Leia na bandeira indicando se o usuário tem demonstrado consciência
@@ -96,7 +97,7 @@ public class NavigationDrawerFragment extends Fragment {
 	}
 
 	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
+	public void onActivityCreated(final Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		// Indicam que este fragmento gostaria de influenciar o conjunto de
 		// ações na barra de ação.
@@ -104,54 +105,82 @@ public class NavigationDrawerFragment extends Fragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+		// // mDrawerListView = (ListView)
+		// // inflater.inflate(R.layout.fragment_navigation_drawer, container,
+		// // false).findViewById(R.id.listDrawer);
 		// mDrawerListView = (ListView)
 		// inflater.inflate(R.layout.fragment_navigation_drawer, container,
-		// false).findViewById(R.id.listDrawer);
-		mDrawerListView = (ListView) inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+		// false);
+		// mDrawerListView.setOnItemClickListener(new
+		// AdapterView.OnItemClickListener() {
+		// @Override
+		// public void onItemClick(AdapterView<?> parent, View view, int
+		// position, long id) {
+		// selectItem(position);
+		// }
+		// });
+		// // mDrawerListView.setAdapter(new
+		// // ArrayAdapter<String>(getActionBar().getThemedContext(),
+		// // android.R.layout.simple_list_item_activated_1, android.R.id.text1,
+		// // new String[]{
+		// // getString(R.string.title_section1),
+		// // getString(R.string.title_section2),
+		// // getString(R.string.title_section3), }));
+		//
+		// // load slide menu items
+		// navMenuTitles =
+		// getResources().getStringArray(R.array.nav_drawer_items);
+		//
+		// // nav drawer icons from resources
+		// navMenuIcons =
+		// getResources().obtainTypedArray(R.array.nav_drawer_icons);
+		//
+		// navDrawerItems = new ArrayList<NavDrawerItem>();
+		//
+		// navDrawerItems.add(new NavDrawerItem(navMenuTitles[0],
+		// navMenuIcons.getResourceId(0, -1)));
+		// // Find People
+		// navDrawerItems.add(new NavDrawerItem(navMenuTitles[1],
+		// navMenuIcons.getResourceId(1, -1)));
+		// // Photos
+		// navDrawerItems.add(new NavDrawerItem(navMenuTitles[2],
+		// navMenuIcons.getResourceId(2, -1)));
+		// // Communities, Will add a counter here
+		// navDrawerItems.add(new NavDrawerItem(navMenuTitles[3],
+		// navMenuIcons.getResourceId(3, -1), true, "22"));
+		// // Pages
+		// navDrawerItems.add(new NavDrawerItem(navMenuTitles[4],
+		// navMenuIcons.getResourceId(4, -1)));
+		// // What's hot, We will add a counter here
+		// navDrawerItems.add(new NavDrawerItem(navMenuTitles[5],
+		// navMenuIcons.getResourceId(5, -1), true, "50+"));
+		//
+		// // Recycle the typed array
+		// navMenuIcons.recycle();
+		//
+		// // setting the nav drawer list adapter
+		// adapter = new
+		// NavDrawerListAdapter(getActivity().getApplicationContext(),
+		// navDrawerItems);
+		// mDrawerListView.setAdapter(adapter);
+		//
+		// mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
+		// return mDrawerListView;
+
+		View view = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+
+		mDrawerListView = (ListView) view.findViewById(R.id.navigationItems);
 		mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long id) {
 				selectItem(position);
 			}
 		});
-		// mDrawerListView.setAdapter(new
-		// ArrayAdapter<String>(getActionBar().getThemedContext(),
-		// android.R.layout.simple_list_item_activated_1, android.R.id.text1,
-		// new String[]{
-		// getString(R.string.title_section1),
-		// getString(R.string.title_section2),
-		// getString(R.string.title_section3), }));
-
-		// load slide menu items
-		navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
-
-		// nav drawer icons from resources
-		navMenuIcons = getResources().obtainTypedArray(R.array.nav_drawer_icons);
-
-		navDrawerItems = new ArrayList<NavDrawerItem>();
-
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1)));
-		// Find People
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1)));
-		// Photos
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
-		// Communities, Will add a counter here
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1), true, "22"));
-		// Pages
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1)));
-		// What's hot, We will add a counter here
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1), true, "50+"));
-
-		// Recycle the typed array
-		navMenuIcons.recycle();
-
-		// setting the nav drawer list adapter
-		adapter = new NavDrawerListAdapter(getActivity().getApplicationContext(), navDrawerItems);
-		mDrawerListView.setAdapter(adapter);
-
+		mDrawerListView.setAdapter(new ArrayAdapter<String>(getActionBar().getThemedContext(), android.R.layout.simple_list_item_activated_1, android.R.id.text1, new String[]{
+				getString(R.string.title_section1), getString(R.string.title_section2), getString(R.string.title_section3), }));
 		mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
-		return mDrawerListView;
+		return view;
 	}
 
 	public boolean isDrawerOpen() {
@@ -165,7 +194,7 @@ public class NavigationDrawerFragment extends Fragment {
 	 *            actividade.
 	 * @param drawerLayout O DrawerLayout contendo IU deste fragmento.
 	 */
-	public void setUp(int fragmentId, DrawerLayout drawerLayout) {
+	public void setUp(final int fragmentId, final DrawerLayout drawerLayout) {
 		mFragmentContainerView = getActivity().findViewById(fragmentId);
 		mDrawerLayout = drawerLayout;
 
@@ -193,7 +222,7 @@ public class NavigationDrawerFragment extends Fragment {
 										 */
 		) {
 			@Override
-			public void onDrawerClosed(View drawerView) {
+			public void onDrawerClosed(final View drawerView) {
 				super.onDrawerClosed(drawerView);
 				if (!isAdded()) {
 					return;
@@ -203,7 +232,7 @@ public class NavigationDrawerFragment extends Fragment {
 			}
 
 			@Override
-			public void onDrawerOpened(View drawerView) {
+			public void onDrawerOpened(final View drawerView) {
 				super.onDrawerOpened(drawerView);
 				if (!isAdded()) {
 					return;
@@ -242,7 +271,7 @@ public class NavigationDrawerFragment extends Fragment {
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 	}
 
-	private void selectItem(int position) {
+	private void selectItem(final int position) {
 		mCurrentSelectedPosition = position;
 		if (mDrawerListView != null) {
 			mDrawerListView.setItemChecked(position, true);
@@ -256,7 +285,7 @@ public class NavigationDrawerFragment extends Fragment {
 	}
 
 	@Override
-	public void onAttach(Activity activity) {
+	public void onAttach(final Activity activity) {
 		super.onAttach(activity);
 		try {
 			mCallbacks = (NavigationDrawerCallbacks) activity;
@@ -272,20 +301,20 @@ public class NavigationDrawerFragment extends Fragment {
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(final Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putInt(STATE_SELECTED_POSITION, mCurrentSelectedPosition);
 	}
 
 	@Override
-	public void onConfigurationChanged(Configuration newConfig) {
+	public void onConfigurationChanged(final Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
 		// Encaminhar a nova configuração do componente gaveta de alternância.
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
 
 	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+	public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater) {
 		// Se a gaveta for aberta, mostrar as ações de aplicativos globais na
 		// barra de ação.
 		// Veja também showGlobalContextActionBar, que controla a área superior
@@ -298,7 +327,7 @@ public class NavigationDrawerFragment extends Fragment {
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	public boolean onOptionsItemSelected(final MenuItem item) {
 		if (mDrawerToggle.onOptionsItemSelected(item)) {
 			return true;
 		}
@@ -314,8 +343,7 @@ public class NavigationDrawerFragment extends Fragment {
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayShowTitleEnabled(true);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-		// actionBar.setTitle(R.string.app_name);
-		actionBar.setTitle("");
+		actionBar.setTitle(R.string.app_name);
 	}
 
 	private ActionBar getActionBar() {
