@@ -84,7 +84,7 @@ public abstract class BaseActionBarActivity extends ActionBarActivity implements
 			FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 			transaction.setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out, R.anim.abc_fade_in, R.anim.abc_fade_out);
 			transaction.replace(R.id.container, fragment);
-			transaction.addToBackStack(null);
+//			transaction.addToBackStack(null);
 			transaction.commit();
 
 			// update selected item and title, then close the drawer
