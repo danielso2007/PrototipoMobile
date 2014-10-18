@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import br.com.pinngo.R;
 import br.com.pinngo.activities.base.BaseActionBarActivity;
+import br.com.pinngo.fragments.NavigationDrawerFragment;
 
 public class PrincipalActivity extends BaseActionBarActivity {
 

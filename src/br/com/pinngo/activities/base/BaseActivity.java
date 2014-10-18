@@ -1,7 +1,7 @@
 package br.com.pinngo.activities.base;
 
 import br.com.pinngo.R;
-import br.com.pinngo.activities.NavigationDrawerFragment;
+import br.com.pinngo.fragments.NavigationDrawerFragment;
 import br.com.pinngo.util.Utils;
 import android.app.Activity;
 
